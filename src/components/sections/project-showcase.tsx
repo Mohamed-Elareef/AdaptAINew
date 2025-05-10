@@ -20,12 +20,16 @@ const realEstateSolution = {
 };
 
 const aiProducts = [
-  { title: 'Smart Radio', description: 'Customized audio/visual news based on user interests and location.', icon: <Image src="https://picsum.photos/seed/radio/100/100" alt="Smart Radio" width={60} height={60} className="rounded-md" data-ai-hint="abstract soundwave" /> },
-  { title: 'Job Search Platform', description: 'Connects individuals needing home/craft services with qualified workers.', icon: <Image src="https://picsum.photos/seed/jobplatform/100/100" alt="Job Search Platform" width={60} height={60} className="rounded-md" data-ai-hint="network people" /> },
-  { title: 'Real Estate Marketing Apps', description: 'Simplifies property buying, selling, and renting using AI.', icon: <Image src="https://picsum.photos/seed/realestateapp/100/100" alt="Real Estate App" width={60} height={60} className="rounded-md" data-ai-hint="modern house" /> },
-  { title: 'Custom AI Tools', description: 'Solutions for agriculture, real estate, and creative media.', icon: <Image src="https://picsum.photos/seed/customtools/100/100" alt="Custom AI Tools" width={60} height={60} className="rounded-md" data-ai-hint="gears tools" /> },
-  { title: 'Virtual Collaborative Workspaces', description: 'Environment for entrepreneurs, investors, and experts.', icon: <Image src="https://picsum.photos/seed/workspace/100/100" alt="Virtual Workspaces" width={60} height={60} className="rounded-md" data-ai-hint="virtual meeting" /> },
-  { title: 'Specialized Consultations', description: 'Digital marketing and growth strategies for small businesses.', icon: <Image src="https://picsum.photos/seed/consultations/100/100" alt="Specialized Consultations" width={60} height={60} className="rounded-md" data-ai-hint="business strategy" /> },
+  {
+    title: 'راديو الذكاء الاصطناعي الذكي',
+    description: 'أخبار صوتية ومرئية مخصصة بناءً على اهتمامات المستخدم وموقعه.',
+    icon: <Image src="https://picsum.photos/seed/smartairadio/100/100" alt="Smart AI Radio" width={60} height={60} className="rounded-md" data-ai-hint="radio wave" />
+  },
+  {
+    title: 'قناة أخبار مرئية بالذكاء الاصطناعي',
+    description: 'قناة إخبارية تقدم محتوى مرئيًا يتم إنشاؤه وتحليله بواسطة الذكاء الاصطناعي لتوفير تغطية إخبارية مبتكرة وشخصية.',
+    icon: <Image src="https://picsum.photos/seed/visualainews/100/100" alt="Visual AI News Channel" width={60} height={60} className="rounded-md" data-ai-hint="news screen" />
+  },
 ];
 
 const productUniqueness = [
@@ -97,7 +101,7 @@ export default function ProjectShowcaseSection() {
             <div className="space-y-8">
               <div>
                 <h3 className="text-xl md:text-2xl font-semibold text-center text-foreground mb-6">Planned Products</h3>
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 max-w-3xl mx-auto">
                   {aiProducts.map((product) => (
                     <Card key={product.title} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
                       <CardHeader className="flex flex-row items-center gap-4">
@@ -134,3 +138,4 @@ export default function ProjectShowcaseSection() {
     </section>
   );
 }
+
