@@ -21,13 +21,13 @@ const realEstateSolution = {
 
 const aiProducts = [
   {
-    title: 'راديو الذكاء الاصطناعي الذكي',
-    description: 'أخبار صوتية ومرئية مخصصة بناءً على اهتمامات المستخدم وموقعه.',
+    title: 'Smart AI Radio',
+    description: 'Personalized audio and visual news based on user interests and location.',
     icon: <Image src="https://picsum.photos/seed/smartairadio/100/100" alt="Smart AI Radio" width={60} height={60} className="rounded-md" data-ai-hint="radio wave" />
   },
   {
-    title: 'قناة أخبار مرئية بالذكاء الاصطناعي',
-    description: 'قناة إخبارية تقدم محتوى مرئيًا يتم إنشاؤه وتحليله بواسطة الذكاء الاصطناعي لتوفير تغطية إخبارية مبتكرة وشخصية.',
+    title: 'Visual AI News Channel',
+    description: 'A news channel that provides visual content generated and analyzed by artificial intelligence to offer innovative and personalized news coverage.',
     icon: <Image src="https://picsum.photos/seed/visualainews/100/100" alt="Visual AI News Channel" width={60} height={60} className="rounded-md" data-ai-hint="news screen" />
   },
 ];
