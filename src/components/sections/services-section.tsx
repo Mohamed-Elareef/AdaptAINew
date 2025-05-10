@@ -1,5 +1,5 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Building2, CheckCircle, Cog, Settings, BarChart3, Brain, Zap, Leaf, LineChart } from 'lucide-react';
+import { Building2, CheckCircle, Cog, Settings, BarChart3, Brain, Zap, Leaf, LineChart, Radio, Tv2 } from 'lucide-react';
 
 const businessModelServices = [
   {
@@ -17,7 +17,7 @@ const businessModelServices = [
     icon: <Cog className="h-10 w-10 text-primary mb-4" />,
     title: 'AI Products',
     description: 'We develop innovative products based on artificial intelligence for various sectors.',
-    features: ['Smart Radio', 'Job Search Platform', 'Real Estate Marketing Applications', 'Custom Tools'],
+    features: ['Smart AI Radio', 'Visual AI News Channel'],
   },
 ];
 
@@ -74,7 +74,14 @@ export default function ServicesSection() {
             {businessModelServices.map((service) => (
               <Card key={service.title} className="shadow-lg hover:shadow-xl transition-shadow duration-300 flex flex-col">
                 <CardHeader className="items-center text-center">
-                  {service.icon}
+                  {service.title === 'AI Products' ? (
+                     service.features.length === 2 && service.features.includes('Smart AI Radio') && service.features.includes('Visual AI News Channel') ? 
+                     <div className="flex space-x-2">{/** Using generic Cog as specific icons for these two are not requested explicitly */}
+                       <Radio className="h-10 w-10 text-primary mb-4" /> 
+                       <Tv2 className="h-10 w-10 text-primary mb-4" />
+                     </div>
+                      : service.icon
+                  ) : service.icon}
                   <CardTitle className="text-xl">{service.title}</CardTitle>
                   <CardDescription>{service.description}</CardDescription>
                 </CardHeader>
