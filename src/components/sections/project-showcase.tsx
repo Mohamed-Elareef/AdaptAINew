@@ -1,21 +1,22 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Building, Cpu, CheckCircle, Lightbulb, Tag, Laptop, RefreshCw, LineChart, Coins, Smile, SearchCode } from 'lucide-react';
+import { Lightbulb, Tag, Laptop, RefreshCw, LineChart, Coins, Smile, SearchCode, Brain, Briefcase, Target, TrendingUp, Shuffle, Settings2, Users, BarChartBig } from 'lucide-react';
 import Image from 'next/image';
 
-const realEstateSolution = {
-  challenge: "A real estate marketing company seeks to improve its operations and increase team efficiency using artificial intelligence. Challenges include data analysis, customer communication, and identifying client needs.",
-  solutions: [
-    { title: 'AI CRM System', description: 'Smart customer relationship management for better data analysis and client tracking.' },
-    { title: 'Intelligent Chatbot', description: 'Instant responses to customer inquiries, available 24/7.' },
-    { title: 'Needs Analysis System', description: 'Accurately identifies customer needs and preferences.' },
-    { title: 'Property Recommendation Tool', description: 'Suggests suitable properties based on AI analysis.' },
+const genericBusinessSolution = {
+  title: "Custom AI-Powered Business Transformation",
+  challenge: "AdaptAI partners with businesses across various sectors to identify growth opportunities, overcome operational challenges, and leverage the power of artificial intelligence for sustainable success. We analyze existing workflows, identify pain points, and design tailored AI strategies to drive efficiency and innovation.",
+  approach: [
+    { icon: <BarChartBig className="h-7 w-7 text-primary" />, title: 'In-depth Business Analysis', description: 'Comprehensive assessment of your current operations, market position, and strategic objectives to identify key areas for AI intervention.' },
+    { icon: <Target className="h-7 w-7 text-primary" />, title: 'Custom AI Strategy Design', description: 'Developing a bespoke AI roadmap, outlining specific solutions, technologies, and implementation plans aligned with your unique business needs.' },
+    { icon: <Settings2 className="h-7 w-7 text-primary" />, title: 'Solution Implementation & Integration', description: 'Building and seamlessly integrating custom AI tools, platforms, and systems into your existing infrastructure with minimal disruption.' },
+    { icon: <TrendingUp className="h-7 w-7 text-primary" />, title: 'Performance Monitoring & Optimization', description: 'Continuously tracking the performance of implemented AI solutions, providing ongoing support, and making iterative improvements for optimal results.' },
   ],
   expectedResults: [
-    { icon: <LineChart className="h-6 w-6 text-primary" />, title: 'Increased Operational Efficiency', description: 'Up to 40% increase through process automation.' },
-    { icon: <Coins className="h-6 w-6 text-green-500" />, title: 'Cost Reduction', description: '25% reduction in operational costs.' },
-    { icon: <Smile className="h-6 w-6 text-yellow-500" />, title: 'Improved Customer Experience', description: '35% improvement through faster, accurate interactions.' },
-    { icon: <SearchCode className="h-6 w-6 text-purple-500" />, title: 'Increased Sales', description: '20% increase through improved interactions and data analysis.' },
+    { icon: <LineChart className="h-6 w-6 text-primary" />, title: 'Enhanced Operational Efficiency', description: 'Streamline processes and automate tasks to boost productivity.' },
+    { icon: <Coins className="h-6 w-6 text-green-500" />, title: 'Reduced Operational Costs', description: 'Optimize resource allocation and minimize unnecessary expenditures.' },
+    { icon: <Brain className="h-6 w-6 text-yellow-500" />, title: 'Improved Decision Making', description: 'Leverage data-driven insights for more informed strategic choices.' },
+    { icon: <Users className="h-6 w-6 text-purple-500" />, title: 'Scalable Growth & Innovation', description: 'Future-proof your business with adaptable AI solutions that foster innovation.' },
   ],
 };
 
@@ -60,32 +61,35 @@ export default function ProjectShowcaseSection() {
             <Card className="shadow-xl">
               <CardHeader>
                 <CardTitle className="text-2xl flex items-center gap-2">
-                  <Building className="h-7 w-7 text-primary" />
-                  Real Estate Marketing Company Development
+                  <Briefcase className="h-7 w-7 text-primary" />
+                  {genericBusinessSolution.title}
                 </CardTitle>
-                <CardDescription>{realEstateSolution.challenge}</CardDescription>
+                <CardDescription>{genericBusinessSolution.challenge}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div>
-                  <h4 className="font-semibold text-lg mb-2 text-foreground">Our Solutions:</h4>
+                  <h4 className="font-semibold text-lg mb-3 text-foreground">Our Approach:</h4>
                   <div className="grid md:grid-cols-2 gap-4">
-                    {realEstateSolution.solutions.map(sol => (
-                      <Card key={sol.title} className="bg-muted/50">
-                        <CardHeader>
-                          <CardTitle className="text-md">{sol.title}</CardTitle>
+                    {genericBusinessSolution.approach.map(step => (
+                      <Card key={step.title} className="bg-muted/50">
+                        <CardHeader className="flex flex-row items-start gap-3 space-y-0">
+                          {step.icon}
+                          <div className="flex-1">
+                            <CardTitle className="text-md">{step.title}</CardTitle>
+                          </div>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-sm text-muted-foreground">{sol.description}</p>
+                          <p className="text-sm text-muted-foreground ml-10">{step.description}</p>
                         </CardContent>
                       </Card>
                     ))}
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-semibold text-lg mb-2 text-foreground">Expected Results:</h4>
+                  <h4 className="font-semibold text-lg mb-3 text-foreground">Expected Outcomes:</h4>
                   <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                    {realEstateSolution.expectedResults.map(res => (
-                       <div key={res.title} className="flex flex-col items-center text-center p-4 border rounded-lg bg-background">
+                    {genericBusinessSolution.expectedResults.map(res => (
+                       <div key={res.title} className="flex flex-col items-center text-center p-4 border rounded-lg bg-background shadow-sm">
                         {res.icon}
                         <h5 className="font-semibold mt-2 text-sm">{res.title}</h5>
                         <p className="text-xs text-muted-foreground mt-1">{res.description}</p>
@@ -138,4 +142,3 @@ export default function ProjectShowcaseSection() {
     </section>
   );
 }
-
