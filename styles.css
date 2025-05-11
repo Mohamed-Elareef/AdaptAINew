@@ -469,6 +469,8 @@ main {
 .icon-green { color: hsl(145 58% 50%); } /* Approx green-500 */
 .icon-yellow { color: hsl(48 96% 53%); } /* Approx yellow-500 */
 .icon-purple { color: hsl(262 84% 60%); } /* Approx purple-500 */
+.icon-accent { color: var(--accent); }
+
 
 .card-header-centered {
     display: flex;
@@ -543,9 +545,16 @@ main {
 }
 .icon-combo { display: flex; gap: 0.5rem; justify-content: center; margin-bottom: 1rem;}
 .icon-combo svg {
-    height: 2.5rem; /* h-10 w-10 */
+    /* Sizing defined on SVG elements in HTML directly (width="24" height="24")
+       but they are inside icon-primary class, let's ensure the color propagates
+       and the size from SVG tag is used unless overridden here.
+       The original HTML uses inline style for the width/height on the SVG for Radio and Tv2
+       <svg class="lucide lucide-radio icon-primary" width="24" height="24" ...>
+       So the below is more of a fallback or to enforce a standard if not on the tag.
+    */
+    height: 2.5rem; /* Default size for combo icons unless set on tag */
     width: 2.5rem;
-    color: var(--primary);
+    color: var(--primary); /* Default, icon-primary will also do this */
 }
 
 /* Project Showcase Section - Tabs (ShadCN Tabs like) */
@@ -612,14 +621,14 @@ main {
 }
 .project-approach-step .lucide, .project-outcome-item .lucide {
     flex-shrink: 0;
-    height: 1.75rem; /* h-7 w-7 or h-6 w-6 */
-    width: 1.75rem;
-    color: var(--primary);
+    /* Sizing will be from the SVG tag's width/height attributes (e.g., width="24" height="24") */
+    color: var(--primary); /* Default, can be overridden by icon-green etc. */
     margin-top: 0.125rem; /* Align with text */
 }
 .project-approach-step .card-title, .project-outcome-item h5 {
     font-size: 1rem; /* text-md or similar */
     font-weight: 600;
+    color: var(--foreground); /* Ensures title color is foreground */
 }
 .project-approach-step p, .project-outcome-item p {
     font-size: 0.875rem; /* text-sm */
@@ -638,6 +647,14 @@ main {
 .project-outcome-item.card h5 { margin-top: 0.5rem; font-size: 0.875rem;}
 .project-outcome-item.card p { font-size: 0.75rem; margin-top: 0.25rem;}
 
+/* Text styles from original for specific elements */
+.font-semibold { font-weight: 600; }
+.text-lg { font-size: 1.125rem; }
+.mb-3 { margin-bottom: 0.75rem; }
+.text-foreground { color: var(--foreground); }
+.text-xs { font-size: 0.75rem; }
+
+
 /* Testimonials Section */
 .rating {
     display: flex; /* For star alignment */
@@ -647,9 +664,11 @@ main {
 .rating .lucide-star { /* Star icon */
     height: 1.25rem; /* h-5 w-5 */
     width: 1.25rem;
+    /* fill and stroke are handled by 'filled' class or default currentColor for unfilled */
 }
 .rating .lucide-star.filled {
-    fill: hsl(47.9, 95.8%, 53.1%);
+    fill: hsl(47.9, 95.8%, 53.1%); /* Fill for filled stars */
+    stroke: hsl(47.9, 95.8%, 53.1%); /* Ensure border is also yellow */
 }
 .quote {
     font-style: italic;
@@ -690,10 +709,10 @@ main {
 }
 
 /* Contact Section (ShadCN Form like) */
-.contact-info p { margin-bottom: 1rem; }
+.contact-info p { margin-bottom: 1rem; color: var(--muted-foreground); } /* Ensure p also uses muted-foreground */
 .contact-info .flex { display: flex; align-items: center; gap: 1rem; }
 .contact-info .lucide { height: 1.5rem; width: 1.5rem; color: var(--primary); }
-.contact-info h4 { font-weight: 600; }
+.contact-info h4 { font-weight: 600; color: var(--foreground); }
 .contact-info a { color: var(--muted-foreground); text-decoration: none; }
 .contact-info a:hover { color: var(--primary); }
 
@@ -710,9 +729,8 @@ main {
 .contact-form input[type="text"],
 .contact-form input[type="email"],
 .contact-form textarea,
-.form-input { /* ShadCN Input styling */
+.form-input, .form-textarea { /* ShadCN Input/Textarea styling */
     display: flex;
-    height: 2.5rem; /* h-10 */
     width: 100%;
     border-radius: var(--radius); /* rounded-md */
     border: 1px solid var(--input);
@@ -722,6 +740,10 @@ main {
     line-height: 1.25rem;
     color: var(--foreground);
 }
+.form-input { height: 2.5rem; /* h-10 for input */ }
+.form-textarea { min-height: 80px; /* min-h-[80px] for textarea */ }
+
+
 .contact-form input[type="text"]::placeholder,
 .contact-form input[type="email"]::placeholder,
 .contact-form textarea::placeholder {
@@ -730,14 +752,13 @@ main {
 .contact-form input[type="text"]:focus-visible,
 .contact-form input[type="email"]:focus-visible,
 .contact-form textarea:focus-visible,
-.form-input:focus-visible { /* focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 */
+.form-input:focus-visible, .form-textarea:focus-visible { /* focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 */
     outline: 2px solid transparent;
     outline-offset: 2px;
     border-color: var(--ring); /* Or input focus color if different */
     box-shadow: 0 0 0 2px var(--background), 0 0 0 4px var(--ring);
 }
-.contact-form textarea, .form-textarea { /* min-h-[80px] */
-    min-height: 80px;
+.form-textarea {
     height: auto; /* Allow it to grow if needed */
     resize: vertical;
 }
@@ -856,12 +877,15 @@ main {
 .chatbot-close-button { /* X button */
     background: none;
     border: none;
-    font-size: 1.5rem; /* For &times; or use Lucide X */
+    /* font-size: 1.5rem; For &times; or use Lucide X */
     cursor: pointer;
     color: var(--muted-foreground);
     padding: 0.25rem; /* For better click area */
     border-radius: var(--radius);
     opacity: 0.7;
+    display: flex; /* To center SVG if Lucide is used */
+    align-items: center;
+    justify-content: center;
 }
 .chatbot-close-button:hover {
     opacity: 1;
@@ -914,6 +938,11 @@ main {
 .message-avatar .lucide { /* h-4 w-4 */
     height: 1rem; width: 1rem; color: var(--muted-foreground);
 }
+/* Specific avatar icon colors if needed, e.g., AI avatar */
+.message-container.ai .message-avatar .lucide-brain-circuit {
+    color: var(--primary); /* Example: make AI avatar icon primary color */
+}
+
 
 .message { /* max-w-[75%] rounded-lg px-3 py-2 text-sm shadow */
     padding: 0.5rem 0.75rem;
@@ -992,16 +1021,19 @@ main {
 .chat-input-area + p { /* (Chat functionality is currently illustrative) */
     font-size: 0.8em; text-align: center; margin-top: 10px;
     padding: 0 1rem 0.5rem; /* Adjust if inside content or outside */
+    color: var(--muted-foreground);
 }
 
-/* Lucide icon general sizing if not overridden */
+/* Lucide icon general styling */
 .lucide {
     display: inline-block;
     vertical-align: middle;
+    /* Default stroke-width, fill, stroke are usually on the SVG tag itself */
 }
 
-/* Ensure SVGs scale correctly if width/height not set directly */
-svg:not([width]):not([height]) {
-    width: 1em;
-    height: 1em;
+/* Ensure SVGs scale correctly if width/height not set directly on tag AND not by CSS rule */
+/* This is a general fallback, specific CSS rules for icons (e.g. .navbar-logo svg) will take precedence */
+svg.lucide:not([width]):not([height]) {
+    width: 1.5rem; /* Default 24px if not specified */
+    height: 1.5rem;
 }
